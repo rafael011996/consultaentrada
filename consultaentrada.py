@@ -1,0 +1,33 @@
+import pandas as pd
+import streamlit as st
+
+# Carregar CSV
+@st.cache_data(ttl=0)
+def carregar_dados():
+    url = 'https://raw.githubusercontent.com/rafael011996/consultaentrada/main/consultaentrada.csv'
+    return pd.read_csv(url, delimiter=';', encoding='utf-8')
+
+
+# Interface do app
+st.title('Consulta de Entradas')
+
+dados = carregar_dados()
+
+# Mostrar somente colunas relevantes
+dados = dados[['NF', 'Emissao', 'CGC/CPF', 'Razao', 'Operacao', 'Repr', 'Valor', 'da', 'Nota']]
+
+# Entrada de busca
+consulta = st.text_input('Digite o Código ou parte da NF:')
+
+if consulta:
+    # Filtro de busca
+    resultado = dados[dados.apply(lambda row: 
+                                  consulta.lower() in str(row['NF']).lower() or                                  
+                                  consulta.lower() in str(row['CGC/CPF']).lower(), 
+                                  axis=1)]
+    
+    if not resultado.empty:
+        st.write('Resultados encontrados:')
+        st.dataframe(resultado)
+    else:
+        st.warning('Nenhum produto encontrado.')
