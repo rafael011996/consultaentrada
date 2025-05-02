@@ -14,7 +14,7 @@ st.title('Consulta de Entradas')
 dados = carregar_dados()
 
 # Mostrar somente colunas relevantes
-dados = dados[['NF', 'Emissao', 'CGC/CPF', 'Razao', 'Operacao', 'Repr', 'Valor', 'da', 'Nota']]
+dados = dados[['Nota', 'Emissao', 'CGC/CPF', 'Razao', 'Valor da Nota']]
 
 # Entrada de busca
 consulta = st.text_input('Digite o Código ou parte da NF:')
@@ -22,7 +22,7 @@ consulta = st.text_input('Digite o Código ou parte da NF:')
 if consulta:
     # Filtro de busca
     resultado = dados[dados.apply(lambda row: 
-                                  consulta.lower() in str(row['NF']).lower() or                                  
+                                  consulta.lower() in str(row['Nota']).lower() or                                  
                                   consulta.lower() in str(row['CGC/CPF']).lower(), 
                                   axis=1)]
     
