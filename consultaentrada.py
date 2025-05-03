@@ -5,7 +5,7 @@ import streamlit as st
 @st.cache_data(ttl=0)
 def carregar_dados():
     url = 'https://raw.githubusercontent.com/rafael011996/consultaentrada/main/consultaentrada.xlsx'
-    return pd.read_csv(url, delimiter=';', encoding='utf-8')
+    return pd.read_xlsx(url, delimiter=';', encoding='utf-8')
 
 
 # Interface do app
