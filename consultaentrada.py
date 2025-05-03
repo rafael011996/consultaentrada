@@ -4,8 +4,8 @@ import streamlit as st
 # Carregar Excel
 @st.cache_data(ttl=0)
 def carregar_dados():
-    url = 'https://raw.githubusercontent.com/rafael011996/consultaentrada/main/consultaentrada.xlsx'
-    return pd.read_excel(url)
+    url = 'https://raw.githubusercontent.com/rafael011996/consultaentrada/main/consultaentrada.csv'
+    return pd.read_csv(url)
 
 # Interface do app
 st.title('Consulta de Entradas')
