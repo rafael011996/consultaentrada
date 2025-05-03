@@ -22,8 +22,8 @@ consulta = st.text_input('Digite o Código ou parte da NF:')
 if consulta:
     # Filtro de busca
     resultado = dados[dados.apply(lambda row: 
-                                  consulta.lower() in str(row['Nota']).lower() or
-                                  consulta.lower() in str(row['Razao']).lower() or
+                                  consulta.lower() in str(row['Nota']).lower() or  
+                                  consulta.lower() in str(row['Razao']).lower() or                                
                                   consulta.lower() in str(row['CGC/CPF']).lower(), 
                                   axis=1)]
     
