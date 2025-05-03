@@ -4,7 +4,7 @@ import streamlit as st
 # Carregar CSV
 @st.cache_data(ttl=0)
 def carregar_dados():
-    url = 'https://raw.githubusercontent.com/rafael011996/consultaentrada/main/consultaentrada.CSV'
+    url = 'https://raw.githubusercontent.com/rafael011996/consultaentrada/main/consultaentrada.xlsx'
     return pd.read_csv(url, delimiter=';', encoding='utf-8')
 
 
@@ -22,7 +22,8 @@ consulta = st.text_input('Digite o Código ou parte da NF:')
 if consulta:
     # Filtro de busca
     resultado = dados[dados.apply(lambda row: 
-                                  consulta.lower() in str(row['Nota']).lower() or                                  
+                                  consulta.lower() in str(row['Nota']).lower() or
+                                  consulta.lower() in str(row['Razao']).lower() or
                                   consulta.lower() in str(row['CGC/CPF']).lower(), 
                                   axis=1)]
     
