@@ -1,24 +1,26 @@
 import pandas as pd
 import streamlit as st
 
-# Carregar Excel
+# Carregar CSV
 @st.cache_data(ttl=0)
 def carregar_dados():
     url = 'https://raw.githubusercontent.com/rafael011996/consultaentrada/main/consultaentrada.csv'
-    return pd.read_csv(url)
+    return pd.read_csv(url, delimiter=';', encoding='utf-8')
+
 
 # Interface do app
 st.title('Consulta de Entradas')
 
 dados = carregar_dados()
 
-# Mostrar colunas específicas
+# Mostrar somente colunas relevantes
 dados = dados[['Nota', 'Emissao', 'Dt.Cont.', 'CGC/CPF', 'Razao', 'Valor da Nota']]
 
 # Entrada de busca
 consulta = st.text_input('Digite o Código ou parte da NF:')
 
 if consulta:
+    # Filtro de busca
     resultado = dados[dados.apply(lambda row: 
                                   consulta.lower() in str(row['Nota']).lower() or  
                                   consulta.lower() in str(row['Razao']).lower() or                                
@@ -30,4 +32,3 @@ if consulta:
         st.dataframe(resultado)
     else:
         st.warning('Nenhum produto encontrado.')
-
