@@ -1,12 +1,11 @@
 import pandas as pd
 import streamlit as st
 
-# Carregar CSV
+# Carregar Excel
 @st.cache_data(ttl=0)
 def carregar_dados():
     url = 'https://raw.githubusercontent.com/rafael011996/consultaentrada/main/consultaentrada.xlsx'
-    return pd.read_excel(url, delimiter=';', encoding='utf-8')
-
+    return pd.read_excel(url)
 
 # Interface do app
 st.title('Consulta de Entradas')
